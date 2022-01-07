@@ -1,0 +1,24 @@
+body#contact {
+    header {
+        padding-top: 150px;
+        padding-bottom: $main-padding;
+    }
+    .sign-in {
+        background-color: $nav-color;
+        border-radius: 10px;
+        text-align: center;
+        padding: 60px;
+        @include sm("max") {padding: 30px;}
+        @include md("max") {padding: 40px;}
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        @include lg("max") {
+            input {
+                grid-column: 1 / 3;
+            }
+        }
+        input , textarea {width: 100%;}
+        textarea , a{grid-column: 1 / 3;}
+    }
+}

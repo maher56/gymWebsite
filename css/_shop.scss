@@ -1,0 +1,36 @@
+body#shop  {
+    section.how-work {
+    div {
+        position: relative;
+        overflow: hidden;
+        height: 700px;
+        border-radius: 10px;
+        @include lg("max"){height: 450px;}
+        @include sm("max"){height: 300px;}
+        opacity: 1;
+        transition: opacity $main-transition;
+        &:hover{opacity: .9;}
+        }
+    }
+    section.home-workouts {
+        .but-gray {
+            font-weight: bold;
+            background-color: transparent;
+            color: #8ea5a0;
+            transition: opacity $main-transition , transform $main-transition;
+            &.active {
+                background-color: #8ea5a0;
+                color: #f7f6e4;
+            }
+            &:hover {
+                opacity: .9;
+                transform: translateY(-3px);
+            }
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            &:focus{outline: none;}
+        }
+    }
+}

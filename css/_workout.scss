@@ -1,0 +1,15 @@
+body#workout  {
+    section.how-work {
+    div {
+        position: relative;
+        overflow: hidden;
+        height: 700px;
+        border-radius: 10px;
+        @include lg("max"){height: 450px;}
+        @include sm("max"){height: 300px;}
+        opacity: 1;
+        transition: opacity $main-transition;
+        &:hover{opacity: .9;}
+        }
+    }
+}

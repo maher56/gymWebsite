@@ -1,0 +1,427 @@
+@mixin sm($direction: "max") {
+    @if $direction == "max"{@media(max-width:575px){@content;}}
+    @else{@media(min-width:576px){@content;}} 
+}
+@mixin md($direction: "max") {
+    @if $direction == "max"{@media(max-width:767px){@content;}}
+    @else{@media(min-width:768px){@content;}} 
+}
+@mixin lg($direction: "max") {
+    @if $direction == "max"{@media(max-width:991px){@content;}}
+    @else{@media(min-width:992px){@content;}} 
+}
+@mixin xl($direction: "max") {
+    @if $direction == "max"{@media(max-width:1199px){@content;}}
+    @else{@media(min-width:1200px){@content;}} 
+}
+@mixin xxl($direction: "max") {
+    @if $direction == "max"{@media(max-width:1399px){@content;}}
+    @else{@media(min-width:1400px){@content;}} 
+}
+@mixin generator($prefix , $sufix: "null" , $pro , $content , $important) {
+    @if $sufix == "null" {
+        .#{$prefix}-sm {@include sm("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-md {@include md("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-lg {@include lg("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-xl {@include xl("min"){#{$pro}: #{$content} #{$important}}}
+    }
+    @else {
+        .#{$prefix}-sm-#{$sufix} {@include sm("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-md-#{$sufix} {@include md("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-lg-#{$sufix} {@include lg("min"){#{$pro}: #{$content} #{$important}}}
+        .#{$prefix}-xl-#{$sufix} {@include xl("min"){#{$pro}: #{$content} #{$important}}}
+    }
+    .h1-sm-d1{@include sm("min"){font-size: 70px !important;}}
+    .h1-md-d1{@include md("min"){font-size: 70px !important;}}
+    .h1-lg-d1{@include lg("min"){font-size: 70px !important;}}
+    .h1-xl-d1{@include xl("min"){font-size: 70px !important;}}
+}
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap');
+* {font-family: $font-family;box-sizing: border-box;}
+a{color: inherit;text-decoration: none; 
+&:hover{color: inherit;}}
+html {font-size: 16px;scroll-behavior: smooth;}
+@for $i from 1 to 7 {
+    h#{$i} {
+        font-weight: bold;
+        color: #000;
+        font-family: $font-family;
+    }
+}
+.containerM {
+    @mixin screen($padding , $width) {
+        padding-left: $padding;
+        padding-right: $padding;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: $width;
+        width: 100%;
+    }
+    @include sm("max")  {@include screen(20px , 540px);}
+    @include sm("min")  {@include screen(30px , 750px);}
+    @include md("min")  {@include screen(40px , 950px);}
+    @include lg("min")  {@include screen(50px, 1150px);}
+    @include xl("min") {@include screen(60px , 1350px);}
+    @include xxl("min"){@include screen(70px , 1700px);}
+}
+@mixin background($url , $liner: false) {
+    @if $liner != false {background: url($url) no-repeat , linear-gradient($liner);}
+    @else {background: url($url) no-repeat;} 
+    background-size: cover;
+}
+@mixin beforeBackground($background-color) {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 125%;
+    left: -10%;
+    background-color:$background-color;
+    top: 50%;
+    transform:translateY(-50%) rotate(-2deg);
+}
+.but {
+    display: inline-block;
+    cursor: pointer;
+    border: 0;
+    span {margin-right: 1rem;}
+    transition: all $main-transition;
+    transform: translateY(0rem);
+    &:hover {
+        opacity: .8;
+        transform: translateY(-.3rem);
+    }
+}
+.but-blue {
+    background-color: $main-color;
+    color: $light;
+    &:hover {
+        color: $light;
+    }
+}
+.but-light {
+    background-color: $light;
+    color: $main-color;
+    &:hover {
+        color: $main-color;
+    }
+}
+.but-lg {
+    border-radius: .3rem;
+    padding: .75rem 1.25rem ;
+    &:hover {padding-left: 1.5rem;}
+}
+.but-sm {
+    border-radius: .3rem;
+    font-size: .75rem;
+    padding: .35rem .75rem;
+    &:hover {padding-left: 18px;}
+}
+.text-main{color: $main-color;}
+.w-nice{width: 80%;}
+.text-bold {font-weight: bold;}
+.text-normal{font-weight: normal;}
+.w-fit {width: fit-content;}
+
+.show-when-scroll {
+    opacity: .8;
+    position: relative;
+    transform: translateY(40px);
+    animation: removeBla $main-transition linear forwards;
+    &.active{animation: bla $main-transition linear forwards;}
+    @keyframes bla {from {opacity: .8;transform: translateY(40);}to {opacity: 1 ;transform: translateY(0) ;}}
+    @keyframes removeBla {from {opacity: 1 ;transform: translateY(0) ;}to {opacity: .8;transform: translateY(40);}}
+}
+.img-object {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    max-width: 100%;
+}
+.image-parent {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 700px;
+    border-radius: 10px;
+    @include md("max") {height: 400px;}
+}
+.image-parent-sm {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 400px ;
+    @include lg("max") {height: 250px;}
+}
+.photo-fram {
+    position: absolute;
+    top: 150px;
+    width: 105%;
+    height: 70%;
+    right: 0;
+    background: url("../img/Lines2.svg") no-repeat $main-color;
+    background-position: 0% 100%;
+    background-size: cover;
+    @include lg("max") {top: 100px;height:40%}
+    @include md("max") {top: unset;bottom: -10px;width: 95%;}
+    &.right {
+        right: unset;
+        left: 0;
+    }
+}
+section.sign-in {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    > div {
+        background-color: $nav-color;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 60px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: fit-content;
+        align-self: center;
+        @include sm("max") {padding: 30px;}
+        @include md("max") {padding: 40px;}
+    }
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1
+    }
+}
+.my-form-lg {
+    border-radius: .3rem;
+    padding: .75rem 1.25rem;
+    border: none;
+    background-color: $form-color;
+    color: $main-color;
+    &:focus{outline: none;}
+}
+.my-form-sm {
+    border-radius: .3rem;
+    font-size: .75rem;
+    padding: .35rem .75rem ;
+    border: none;
+    background-color: $form-color;
+    color: $main-color;
+    &:focus{outline: none;}
+}
+.my-card {
+    position: relative;
+    > div {
+        opacity: .9;
+    }
+    top: 0;
+    &:hover {
+        top: -10px;
+        filter: opacity(.9);
+    }
+    transition: top $main-transition , filter $main-transition;
+
+    overflow:hidden;
+    border-radius: 5px;
+    padding: 0;
+    cursor: pointer;
+    .content {
+        background-color: #FFF;
+        padding: 20px;
+    }
+}
+.line-height-d1{line-height: 1.8 !important;}
+.line-height-d2{line-height: 1.5 !important;}
+@include generator("line-height", "d1", "line-height", 1.8, !important);
+@include generator("line-height", "d2", "line-height", 1.8, !important);
+
+
+.h1-d1 {font-size: 70px !important;}
+.h1-d2 {font-size: 60px !important;}
+.h1-d3 {font-size: 45px !important;}
+.h1-d4 {font-size: 30px !important;}
+.h1-d5 {font-size: 22px !important;}
+@include generator("h1", "d1", "font-size", 70px ,!important);
+@include generator("h1", "d2", "font-size", 60px ,!important);
+@include generator("h1", "d3", "font-size", 45px ,!important);
+@include generator("h1", "d4", "font-size", 30px ,!important);
+@include generator("h1", "d5", "font-size", 22px ,!important);
+
+.p-d1 {font-size: 22px !important;}
+.p-d2 {font-size: 16px !important;}
+.p-d3 {font-size: 12px !important;}
+@include generator("p", "d1", "font-size", 22px , !important);
+@include generator("p", "d2", "font-size", 16px , !important);
+@include generator("p", "d3", "font-size", 22px , !important);
+
+section {
+    padding-top: $main-padding;
+    padding-bottom: $main-padding;
+    position: relative;
+}
+.main-p {
+    font-size: 16px !important;
+    line-height: 1.8em !important;
+}
+.mainNav {
+    z-index: 100;
+    user-select: none;
+    background-color: rgba(255 , 255 , 255 , 0);
+    width: 100%;
+    ul {
+        li {
+            margin-left: 20px;
+            color: $main-color;
+            font-size: $link-size;
+            transition: color $main-transition;
+            &:hover{color: $text-color;}
+        }
+        @include lg("max") {
+            z-index: 1000;
+            position: fixed;
+            width: 50%;
+            left: 100%;
+            transition: left $main-transition;
+            &.active {left: 50%;}
+            top: 0;
+            height: 100%;
+            background-color: $nav-color;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            padding-top: 100px;
+            li {
+                width: 70%;
+                margin-top: 40px;
+                text-align: center;
+                display: block;
+                a {display: block;}
+            }
+            @include sm("max") {
+                width: 100%;
+                &.active {left: 0%;}
+            }
+        }
+    }
+    span.toggler {
+        padding: 10px;
+        z-index: 1001;
+        margin-left: 20px;
+        cursor: pointer;
+        path {fill: $main-color;}
+        @include lg("min") {display: none;}
+        &.active {
+            background-color: $main-color;
+            svg path {fill: $light;}
+        }
+    }
+    span.shop {
+        position: relative;
+        z-index: 1001;
+        cursor: pointer;
+        path {fill: $main-color;transition: $main-transition;}
+        &:hover path{fill: $text-color;}
+    }
+}
+.logo img{fill:currentColor; width: 150px;@include sm("max"){width: 50px;}}
+.product-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%) rotate(3deg);
+    width: 150%;
+    text-align: center;
+    background-color: $nav-color;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    &.pl-main-color {
+        background-color: $main-color;
+        color: #fff;
+    }
+}
+
+section.subfooter {
+    position: relative;
+    background-color: $nav-color;
+    overflow: hidden;
+    .social {
+        display: grid;
+        grid-template-columns: repeat(4 , 1fr);
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+        background-color: $social-color;
+        gap: 10px;
+        width: 110%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%) rotate(2deg);
+        color: #fff;
+        @include sm("max") {grid-template-columns: repeat(2 , 1fr);}
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50px;
+            @include lg("max") {width: 30px;}
+            img {
+                display: inline;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    }
+    > div:not(.social) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        will-change: transform;
+        width: 100%;
+        &.first-line {transform: translateX(-20%);}
+        &.second-line {transform: translateX(-10%);}
+        transition: transform $main-transition;
+        @mixin setImages($size) {
+            height: $size;
+            $cot:0px;
+            @for $i from 1 to 6 {
+                .image:nth-of-type(#{$i}) {
+                    left: calc(80px * #{$i} + #{$cot});
+                    $cot : $cot + $size;
+                }
+            }
+            .image {
+                width: $size;
+                height: $size;
+            }
+        }
+        @include setImages(400px);
+        @include lg("max") {@include setImages(200px)}
+        @include sm("max") {@include setImages(150px)}
+        .image {
+            top: 0;
+            position: absolute;
+            background-size: cover;
+            background-repeat: repeat;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+footer {
+    background-color: $main-color;
+    padding: 10px;
+    svg {width: 150px}
+    h3 {margin: 0}
+}
+// $font-family-main: cursive;
+// $font-family-sub: cursive;
+// $font-family-zix: cursive;
