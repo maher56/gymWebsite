@@ -221,7 +221,7 @@ section.sign-in {
         filter: opacity(.9);
     }
     transition: top $main-transition , filter $main-transition;
-
+    margin-top: 20px;
     overflow:hidden;
     border-radius: 5px;
     padding: 0;
